@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Books</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+	integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+	crossorigin="anonymous">
+</head>
+<body>
+<div align="center">
+	<!-- create navigation bar ( header) -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed"
+					data-toggle="collapse" data-targe t="#navbar" aria-expanded="false"
+					aria-controls="navbar">
+					<span class="sr-only">Toggle navigation</span> <span
+						class="icon-bar"></span> <span class="icon-bar"></span> <span
+						class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="#" th:href="@{/}">Home Page</a>
+			</div>
+			<div id="navbar" class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a th:href="@{/books}">List of books</a></li>
+					<li><a th:href="@{/books/new}">Add book</a></li>
+					<li sec:authorize="isAuthenticated()"><a th:href="@{/logout}">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<br><br><br>
+	<h1>Books</h1>
+	<a href="/books/new">Create New Book</a>
+	<br></br>
+	<div class="container">
+		<table class="table table-striped">
+			<thead>
+			
+				<tr>
+					<th scope="col">Book ID</th>
+					<th scope="col">Author</th>
+					<th scope="col">Title</th>
+					<th scope="col">Rating</th>
+					<th scope="col">Genre</th>
+					<th scope="col">Date Published</th>
+				</tr>
+				
+			</thead>
+			<tbody>
+				<tr th:each="book : ${listBooks}">
+					<td th:text="${book.id}">Book ID</td>
+					<td th:text="${book.author}">Author</td>
+					<td th:text="${book.title}">Title</td>
+					<td th:text="${book.raiting}">Rating</td>
+					<td th:text="${book.genre}">Genre</td>
+					<td th:text="${book.datePublished}">Date Published</td>
+					<td th:text="${book.user.firstName}">User entered</td>
+					<td>
+						<a th:href="@{'/books/edit/' + ${book.id}}" class="btn btn-warning">Edit</a>
+						&nbsp;&nbsp;&nbsp;&nbsp;
+						<a th:href="@{'/books/delete/' + ${book.id}}" class="btn btn-danger">Delete</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
+</body>
+</html>
