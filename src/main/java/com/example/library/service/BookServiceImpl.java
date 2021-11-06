@@ -3,6 +3,7 @@ package com.example.library.service;
 import java.util.List;
 import java.util.Optional;
 
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
@@ -60,6 +61,15 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public void updateBook(long id, Book bookObj) {
 		// TODO Auto-generated method stub
+		try {
+			if(bookObj != null && id == bookObj.getId()){
+				this.bookRepository.save(bookObj);
+			} else {
+				throw new NotFoundException(String.format("Book with id %l was not found.", id));
+			}
+		} catch (NotFoundException ex) {
+			System.out.println(String.format("Not found exception was thrown for id: %l", id));
+		}
 	}
 
 }
