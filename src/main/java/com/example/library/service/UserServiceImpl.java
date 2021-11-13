@@ -5,6 +5,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,19 +20,21 @@ import com.example.library.model.User;
 import com.example.library.repository.UserRepository;
 import com.example.library.dto.UserRegistrationDto;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 	
 	
-	private UserRepository userRepository;
+	private final UserRepository userRepository;
 	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+//	@Autowired
+	private final BCryptPasswordEncoder passwordEncoder;
 	
-	public UserServiceImpl(UserRepository userRepository) {
-		super();
-		this.userRepository = userRepository;
-	}
+//	public UserServiceImpl(UserRepository userRepository) {
+//		super();
+//		this.userRepository = userRepository;
+//	}
 
 	@Override
 	public User save(UserRegistrationDto registrationDto) {

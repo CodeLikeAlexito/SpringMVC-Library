@@ -2,6 +2,7 @@ package com.example.library.service;
 
 import java.util.List;
 
+import com.example.library.dto.BookResponseDto;
 import org.springframework.security.core.Authentication;
 
 import com.example.library.dto.UserRegistrationDto;

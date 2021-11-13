@@ -1,5 +1,9 @@
 package com.example.library.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.Collection;
 import java.util.Set;
 
@@ -50,7 +54,7 @@ public class User {
 	private Set<Book> books;
 	
 	public User() {
-		
+
 	}
 
 	public User(String firstName, String lastName, String email, String password, Collection<Role> roles) {
@@ -61,7 +65,7 @@ public class User {
 		this.password = password;
 		this.roles = roles;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}

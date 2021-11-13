@@ -2,6 +2,9 @@ package com.example.library.controller;
 
 import java.util.List;
 
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,9 +20,12 @@ import com.example.library.dto.UserRegistrationDto;
 import com.example.library.model.Book;
 import com.example.library.model.User;
 
+import javax.xml.ws.Response;
 
-@Controller
+@Slf4j
+@RestController
 @RequestMapping("/registration")
+@RequiredArgsConstructor
 public class UserRegistrationController {
 
 	private UserService userService;
@@ -45,11 +51,11 @@ public class UserRegistrationController {
 		return "redirect:/registration?success";
 	}
 	
-	@GetMapping("all")
-	public String viewAllUsers(Model model) {
+	@GetMapping("/all")
+	public ResponseEntity<List<User>> viewAllUsers() {
 		List<User> listUser = userService.listAllUser();
-		model.addAttribute("listUser", listUser);
-		return "all_users";
+//		model.addAttribute("listUser", listUser);
+		return ResponseEntity.ok(listUser);
 	}
 	
 	/*

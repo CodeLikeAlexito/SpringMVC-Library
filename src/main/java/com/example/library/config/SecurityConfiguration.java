@@ -14,7 +14,7 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import com.example.library.service.UserService;
 
 @Configuration
-@EnableWebSecurity
+//@EnableWebSecurity
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
@@ -33,12 +33,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         return auth;
     }
 	
-	
 	@Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
     }
-	
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {

@@ -12,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -42,7 +44,7 @@ public class Book {
 	private User user;
 	
 	public Book() {}
-	
+
 	public Book(String title, String author, String genre, Date datePublished, double raiting, User user) {
 		this.title = title;
 		this.author = author;
@@ -51,7 +53,7 @@ public class Book {
 		this.raiting = raiting;
 		this.user = user;
 	}
-	
+
 	public long getId() {
 		return id;
 	}
@@ -96,7 +98,7 @@ public class Book {
 	public void setRaiting(double raiting) {
 		this.raiting = raiting;
 	}
-	
-	
+
+
 	
 }

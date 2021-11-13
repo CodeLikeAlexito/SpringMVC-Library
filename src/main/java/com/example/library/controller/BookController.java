@@ -7,7 +7,11 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.library.dto.BookResponseDto;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -30,30 +34,30 @@ import com.example.library.model.Book;
 import com.example.library.model.User;
 import com.example.library.service.BookService;
 
-@Controller
+@Slf4j
+@RestController
 @RequestMapping("/books")
+@RequiredArgsConstructor
 public class BookController {
+
+	private final BookService bookService;
 	
-	@Autowired
-	private BookService bookService;
-	
-	@GetMapping
-	public String viewAllBooks(Model model) {
-		List<Book> listBooks = bookService.getAllBooks();
-		model.addAttribute("listBooks", listBooks);
-		return "book";
+	@GetMapping("/view-all-books")
+	public ResponseEntity<List<Book>> viewAllBooks() {
+		List<Book> listOfBooks = bookService.getAllBooks();
+		return ResponseEntity.ok(listOfBooks);
 	}
 	
-	@GetMapping("/new")
-	public String showForm(Model model) {
-		Book book = new Book();
-		model.addAttribute("book", book);
-		return "new_book";
-	}
+//	@GetMapping("/new")
+//	public String showForm(Model model) {
+//		Book book = new Book();
+//		model.addAttribute("book", book);
+//		return "new_book";
+//	}
 	
 	@GetMapping("/{id}")
-	public Book getBook(@PathVariable long id) {
-		return bookService.getBookById(id);
+	public ResponseEntity<Book> getBook(@PathVariable long id) {
+		return ResponseEntity.ok(bookService.getBookById(id));
 	}
 	
 	@PostMapping
@@ -108,6 +112,4 @@ public class BookController {
 		
 		return bookService.getAllBooks();
 	}*/
-	
-
 }

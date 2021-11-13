@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.Optional;
 
 import javassist.NotFoundException;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
@@ -14,19 +17,20 @@ import com.example.library.model.User;
 import com.example.library.repository.BookRepository;
 import com.example.library.repository.UserRepository;
 
+@Slf4j
 @Service
+@RequiredArgsConstructor
 public class BookServiceImpl implements BookService{
 	
-	
-	private BookRepository bookRepository;
-	private UserRepository userRepository;
+	private final BookRepository bookRepository;
+	private final UserRepository userRepository;
 
-	@Autowired
-	public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository)
-	{
-		this.bookRepository = bookRepository;
-		this.userRepository = userRepository;
-	}
+//	@Autowired
+//	public BookServiceImpl(BookRepository bookRepository, UserRepository userRepository)
+//	{
+//		this.bookRepository = bookRepository;
+//		this.userRepository = userRepository;
+//	}
 	
 	@Override
 	public List<Book> getAllBooks() {

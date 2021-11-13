@@ -1,5 +1,8 @@
 package com.example.library.model;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -16,14 +19,14 @@ public class Role {
 	private String name;
 	
 	public Role() {
-		
+
 	}
-	
+
 	public Role(String name) {
 		super();
 		this.name = name;
 	}
-	
+
 	public Long getId() {
 		return id;
 	}
