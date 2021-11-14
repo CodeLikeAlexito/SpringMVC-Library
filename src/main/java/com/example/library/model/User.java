@@ -1,5 +1,6 @@
 package com.example.library.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -48,7 +49,8 @@ public class User {
 				            name = "role_id", referencedColumnName = "id"))
 	
 	private Collection<Role> roles;
-	
+
+	@JsonBackReference
 	@OneToMany(mappedBy = "user", fetch = FetchType.LAZY,
             cascade = CascadeType.ALL)
 	private Set<Book> books;

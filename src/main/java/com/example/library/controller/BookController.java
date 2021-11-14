@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.example.library.dto.BookResponseDto;
+import com.example.library.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,8 @@ import com.example.library.model.Book;
 import com.example.library.model.User;
 import com.example.library.service.BookService;
 
+import javax.xml.ws.Response;
+
 @Slf4j
 @RestController
 @RequestMapping("/books")
@@ -41,7 +44,10 @@ import com.example.library.service.BookService;
 public class BookController {
 
 	private final BookService bookService;
-	
+	private final UserService userService;
+//	@Autowired
+//	private BookService bookService;
+
 	@GetMapping("/view-all-books")
 	public ResponseEntity<List<Book>> viewAllBooks() {
 		List<Book> listOfBooks = bookService.getAllBooks();
@@ -60,11 +66,19 @@ public class BookController {
 		return ResponseEntity.ok(bookService.getBookById(id));
 	}
 	
-	@PostMapping
-	public String saveBook(@ModelAttribute("book") Book bookObj, Authentication auth) {
+//	@PostMapping
+//	public String saveBook(@ModelAttribute("book") Book bookObj, Authentication auth) {
+//		bookService.saveBook(bookObj, auth);
+//
+//		return "redirect:/";
+//	}
+
+	@PostMapping("/new-book")
+	public ResponseEntity saveBook(@RequestBody Book bookObj, Authentication auth) {
 		bookService.saveBook(bookObj, auth);
-		
-		return "redirect:/";
+		System.out.println("Adding new book");
+		return ResponseEntity.ok().build();
+		//,
 	}
 	
 	@GetMapping("/edit/{id}")

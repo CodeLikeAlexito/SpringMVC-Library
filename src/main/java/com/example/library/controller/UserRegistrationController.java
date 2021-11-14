@@ -28,12 +28,7 @@ import javax.xml.ws.Response;
 @RequiredArgsConstructor
 public class UserRegistrationController {
 
-	private UserService userService;
-
-	public UserRegistrationController(UserService userService) {
-		super();
-		this.userService = userService;
-	}
+	private final UserService userService;
 	
 	@ModelAttribute("user")
     public UserRegistrationDto userRegistrationDto() {
@@ -54,20 +49,7 @@ public class UserRegistrationController {
 	@GetMapping("/all")
 	public ResponseEntity<List<User>> viewAllUsers() {
 		List<User> listUser = userService.listAllUser();
-//		model.addAttribute("listUser", listUser);
 		return ResponseEntity.ok(listUser);
 	}
-	
-	/*
-	@GetMapping
-	public List<User> list() {
-        return userService.listAllUser();
-    }*/
-	
-	/*
-	@PostMapping("/")
-	public String registerUserAccount (@RequestBody UserRegistrationDto userObj) {
-		userService.save(userObj);
-		return "success";
-	}*/
+
 }
